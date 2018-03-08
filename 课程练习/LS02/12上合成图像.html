@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas上合成图形</title>
+    <script type="text/javascript">
+        window.addEventListener('load', eventWindowLoaded, false);
+        function eventWindowLoaded() {
+            canvasApp();
+        }
+
+        function canvasApp() {
+            var theCanvas = document.getElementById('canvas');
+            var context = theCanvas.getContext('2d');
+            //方块2
+            context.fillStyle = "black"; 
+            context.fillRect(10, 10, 200, 200);
+            //方块3
+            context.fillStyle = "red"; 
+            context.fillRect(1, 1, 50, 50);
+
+            context.globalCompositeOperation = "destination-over";//默认为 source-over
+            
+            //                "source-atop"方块3多出方块2的部分被切掉
+            //                "source-in"方块2被隐藏只留方块3
+            //                "source-out"方块2只剩多出方块3的部分
+            //                "source-over"方块都不被切掉
+
+            //                "destination-atop"只剩方块3大小，方块2位于方块3之上
+            //                "destination-in"只剩方块2和方块3重叠部分
+            //                "destination-out"剩除方块3之外的部分
+            //                "destination-over"方块3和方块2重叠部分被隐藏
+
+            context.fillRect(60, 1, 100, 100);
+
+            context.globalAlpha = 0.8;         
+        }
+
+    </script>
+</head>
+
+<body>
+    <!--<div style="position: absolute; top: 50px; left: 50px;">-->
+    <div>
+        <canvas id="canvas" width="500" height="500">
+            Your browser does not support the HTML 5 Canvas.
+        </canvas>
+    </div>
+</body>
+
+</html>
